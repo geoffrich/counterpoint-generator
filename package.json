@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/geoffrey1218/counterpoint-generator#readme",
   "devDependencies": {
-    "jest": "^26.1.0"
+    "jest": "^26.1.0",
+    "vexflow": "^3.0.9"
   }
 }
