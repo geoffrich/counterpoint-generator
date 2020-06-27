@@ -1,23 +1,23 @@
-import Generator from '../src/generator.js';
+import { CounterpointGenerator } from '../dist/bundle.js';
 
 const cantusFirmus = ['C#4', 'B3', 'A3', 'G#3', 'F#3'];
-const generator = new Generator();
+const generator = new CounterpointGenerator();
 const counterpoint = generator.generate(cantusFirmus);
 const staffWidth = cantusFirmus.length * 100;
 
 const VF = Vex.Flow;
 
 // Create an SVG renderer and attach it to the DIV element 
-var div = document.getElementById('vex-container')
-var renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+const div = document.getElementById('vex-container')
+const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
 // Configure the rendering context.
 renderer.resize(500, 500);
-var context = renderer.getContext();
+const context = renderer.getContext();
 context.setFont('Arial', 10, '').setBackgroundFillStyle('#eed');
 
 // Create a stave at position 10, 40 on the canvas.
-var stave = new VF.Stave(10, 40, staffWidth);
+const stave = new VF.Stave(10, 40, staffWidth);
 
 // Add a clef 
 stave.addClef('treble');
@@ -33,18 +33,25 @@ const voices = [
 ];
 
 // Format and justify the notes 
-var formatter = new VF.Formatter().joinVoices(voices).format(voices, staffWidth);
+const formatter = new VF.Formatter().joinVoices(voices).format(voices, staffWidth);
 
 // Render voice
 voices.forEach(voice => voice.draw(context, stave));
 
 function makeVFNote(noteString, stemDirection = Vex.Flow.StaveNote.STEM_UP) {
-    const noteName = noteString.slice(0, noteString.length - 1);
+    const noteName = noteString[0];
     const noteOctave = noteString[noteString.length - 1];
-    return new VF.StaveNote({
+    const note = new VF.StaveNote({
         keys: [`${noteName}/${noteOctave}`],
         duration: 'q',
         clef: 'treble',
         stem_direction: stemDirection
     });
+    if (noteString.length > 2) {
+        return note.addAccidental(
+            0,
+            new VF.Accidental(noteString.slice(1, noteString.length - 1))
+        );
+    }
+    return note;
 }

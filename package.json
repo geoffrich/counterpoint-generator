@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c",
+    "dev": "rollup -cw"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,12 @@
   },
   "homepage": "https://github.com/geoffrey1218/counterpoint-generator#readme",
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^8.1.0",
     "jest": "^26.1.0",
+    "rollup": "^2.18.1",
     "vexflow": "^3.0.9"
+  },
+  "dependencies": {
+    "@tonaljs/tonal": "^4.0.1"
   }
 }
