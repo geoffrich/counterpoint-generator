@@ -1,0 +1,22 @@
+{
+  "name": "counterpoint-generator",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geoffrey1218/counterpoint-generator.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/geoffrey1218/counterpoint-generator/issues"
+  },
+  "homepage": "https://github.com/geoffrey1218/counterpoint-generator#readme",
+  "devDependencies": {
+    "jest": "^26.1.0"
+  }
+}
