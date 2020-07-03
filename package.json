@@ -23,6 +23,7 @@
     "@rollup/plugin-node-resolve": "^8.1.0",
     "jest": "^26.1.0",
     "rollup": "^2.18.1",
+    "rollup-plugin-terser": "^6.1.0",
     "vexflow": "^3.0.9"
   },
   "dependencies": {
