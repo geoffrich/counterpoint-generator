@@ -1,4 +1,7 @@
-import { Note, Interval, Key, PcSet } from '@tonaljs/tonal';
+import * as Note from '@tonaljs/note';
+import * as Interval from '@tonaljs/interval';
+import * as Key from '@tonaljs/key';
+import * as PcSet from '@tonaljs/pcset';
 
 const perfectConsonances = [
     '1P', '5P', '8P'
@@ -15,6 +18,7 @@ export default class Validator {
         const cfNote = this.cantusFirmus[index];
         const cpNote = this.counterpoint[index];
         const interval = Interval.distance(cfNote, cpNote);
+
         if (index === 0) {
             // First interval should be P1, P5, or P8
             if (!perfectConsonances.includes(interval)) {
@@ -24,6 +28,24 @@ export default class Validator {
 
         if (!this.isDiatonic(index)) {
             return false;
+        }
+
+        // Only allow unison on first and last note
+        if (interval === '1P' && index !== 0 && index !== this.cantusFirmus.length - 1) {
+            return false;
+        }
+
+        // Disallow repeating imperfect intervals more than 3 times
+        if (Interval.quality(interval) !== 'P') {
+            const oneIntervalAgo = Interval.distance(this.cantusFirmus[index - 1], this.counterpoint[index - 1]);
+            const twoIntervalsAgo = Interval.distance(this.cantusFirmus[index - 2], this.counterpoint[index - 2]);
+            const threeIntervalAgo = Interval.distance(this.cantusFirmus[index - 3], this.counterpoint[index - 3]);
+
+            if (Interval.num(interval) === Interval.num(oneIntervalAgo)
+                && Interval.num(oneIntervalAgo) === Interval.num(twoIntervalsAgo)
+                && Interval.num(twoIntervalsAgo) === Interval.num(threeIntervalAgo)) {
+                return false;
+            }
         }
 
 

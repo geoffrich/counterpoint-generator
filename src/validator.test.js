@@ -38,9 +38,26 @@ test('non-unison at end is invalid', () => {
 test('non-contrary motion at end is invalid', () => {
     defaultCounterpoint[cfLength - 2] = 'E5';
     expect(checkValidity(cfLength - 1)).toBe(false);
-})
+});
 
 test('non-stepwise motion at end is invalid', () => {
     defaultCounterpoint[cfLength - 2] = 'B4';
     expect(checkValidity(cfLength - 1)).toBe(false);
-})
+});
+
+test('unison on second interval is invalid', () => {
+    defaultCounterpoint[1] = 'G4';
+    expect(checkValidity(1)).toBe(false);
+});
+
+test('more than three 3rds in a row is invalid', () => {
+    defaultCounterpoint = ['A4', 'B4', 'C#5', 'D5', 'E5', 'D5', 'B4', 'A4', 'C#5', 'D5'];
+    defaultCantusFirmus = ['D4', 'G4', 'A4', 'B4', 'C#5', 'F#4', 'G4', 'F#4', 'E4', 'D4'];
+    expect(checkValidity(4)).toBe(false);
+});
+
+test('three 3rds in a row is valid', () => {
+    defaultCounterpoint = ['A4', 'B4', 'C#5', 'D5', 'E5', 'D5', 'B4', 'A4', 'C#5', 'D5'];
+    defaultCantusFirmus = ['D4', 'G4', 'A4', 'B4', 'A4', 'F#4', 'G4', 'F#4', 'E4', 'D4'];
+    expect(checkValidity(4)).toBe(true);
+});

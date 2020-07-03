@@ -7,7 +7,7 @@ const harmonicConsonances = [
 
 export default class CounterpointGenerator {
     generate(cantusFirmus) {
-        const counterpoint = cantusFirmus.map(() => '');
+        const counterpoint = [];
         const validator = new Validator(cantusFirmus, counterpoint);
 
         if (generateRecursive(0)) {
