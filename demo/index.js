@@ -1,6 +1,6 @@
 import { CounterpointGenerator } from '../dist/bundle.js';
 
-const cantusFirmus = ['C#4', 'B3', 'A3', 'G#3', 'F#3'];
+const cantusFirmus = ['C4', 'D4', 'E4', 'F4', 'G4', 'D4', 'F4', 'E4', 'D4', 'C4'];
 const generator = new CounterpointGenerator();
 const counterpoint = generator.generate(cantusFirmus);
 const staffWidth = cantusFirmus.length * 100;
@@ -12,12 +12,12 @@ const div = document.getElementById('vex-container')
 const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
 
 // Configure the rendering context.
-renderer.resize(500, 500);
+renderer.resize(staffWidth + 100, 500);
 const context = renderer.getContext();
 context.setFont('Arial', 10, '').setBackgroundFillStyle('#eed');
 
 // Create a stave at position 10, 40 on the canvas.
-const stave = new VF.Stave(10, 40, staffWidth);
+const stave = new VF.Stave(10, 40, staffWidth + 100);
 
 // Add a clef 
 stave.addClef('treble');

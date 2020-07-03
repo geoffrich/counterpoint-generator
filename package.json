@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "rollup -c",
     "dev": "rollup -cw"
   },
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/geoffrey1218/counterpoint-generator#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.10.4",
     "@rollup/plugin-node-resolve": "^8.1.0",
     "jest": "^26.1.0",
     "rollup": "^2.18.1",
